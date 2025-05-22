@@ -1,0 +1,25 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: TradingPlatform.BusinessLayer.Integration.CustomMessage
+// Assembly: TradingPlatform.BusinessLayer, Version=1.142.20.0, Culture=neutral, PublicKeyToken=null
+// MVID: FCE39EF5-70B0-4A01-B15C-1BAA5F852BD2
+// Assembly location: C:\Users\willi\Desktop\Quantower\TradingPlatform\v1.142.20\bin\TradingPlatform.BusinessLayer.dll
+// XML documentation location: C:\Users\willi\Desktop\Quantower\TradingPlatform\v1.142.20\bin\TradingPlatform.BusinessLayer.xml
+
+using ProtoBuf;
+using System.Runtime.InteropServices;
+using TradingPlatform.BusinessLayer.Utils;
+
+#nullable disable
+namespace TradingPlatform.BusinessLayer.Integration;
+
+[ProtoContract]
+public abstract class CustomMessage : Message, IBufferedProcessorValue<int>, IConnectionBindedObject
+{
+  public string ConnectionId { get; [param: In] internal set; }
+
+  public abstract int MessageId { get; }
+
+  public override MessageType Type => MessageType.Custom;
+
+  public int Key => this.MessageId;
+}
